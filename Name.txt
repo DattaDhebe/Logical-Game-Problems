@@ -1,0 +1,26 @@
+import java.util.Scanner;
+
+public class Name {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.print("Enter Name : ");
+		Scanner sc = new Scanner(System.in);
+		
+		String name = sc.nextLine();
+		//int l = name.length();
+		
+		if( name.length() < 3)
+		{
+			System.out.print("Ensure Name has min 3 character..!");
+		}
+		else
+		{
+			System.out.print("\nHello "+name+" , How are you?");
+		}
+		
+		
+		sc.close();
+	}
+
+}
