@@ -12,9 +12,19 @@ UseCase4=$(($c * $a / $b))
 
 UseCase5=$(($a % $b + $c))
 
-compute[uc1]=$UseCase2
-compute[uc2]=$UseCase3
-compute[uc3]=$UseCase4
-compute[uc4]=$UseCase5
+declare -A Compute
 
-echo "${compute[@]}"
+compute[computation1]=$UseCase2
+compute[computation2]=$UseCase3
+compute[computation3]=$UseCase4
+compute[computation4]=$UseCase5
+echo ${compute[@]}
+
+UseCase[((counter++))]=$UseCase2
+UseCase[((counter++))]=$UseCase3
+UseCase[((counter++))]=$UseCase4
+UseCase[((counter++))]=$UseCase5
+
+echo ${UseCase[@]}
+
+
