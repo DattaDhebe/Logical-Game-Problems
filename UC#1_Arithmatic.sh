@@ -30,7 +30,7 @@ for ((count=1; count<=4; count++))
 do
 	for ((inner_count=$count; inner_count<=4; inner_count++))
 	do
-		if [ ${arr[count]} -lt ${arr[inner_count]} ]
+		if [ ${arr[count]} -gt ${arr[inner_count]} ]
 		then
 			temp=${arr[count]};
 			arr[$count]=${arr[$inner_count]};
