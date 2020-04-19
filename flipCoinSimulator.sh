@@ -8,21 +8,57 @@ declare -A dictionary
 head=0;
 tail=0;
 
-for ((i=1; i<=count; i++))
-do
-	flip=$(( RANDOM % 2 ))
-	if [ $flip -eq 1 ]
-	then
-		head=$(($head + 1));
-	else
-		tail=$(($tail + 1));
-	fi
+function singletCombination() {
+	for ((i=1; i<=count; i++))
+	do
+		flip=$(( RANDOM % 2 ))
+		if [ $flip -eq 1 ]
+		then
+			head=$(($head + 1));
+		else
+			tail=$(($tail + 1));
+		fi
 	
-	dictionary[$i]=$flip;
+		dictionary[$i]=$flip;
 
-done
+	done
 
-head_percentage=$(( $head * 100 / $count ))
-tail_percentage=$(( $tail * 100 / $count ))
+	head_percentage=$(( $head * 100 / $count ))
+	tail_percentage=$(( $tail * 100 / $count ))
+	
+	echo ${dictionary[@]}
+}
 
+singletCombination $count
 
+#varibale declaration for doublet
+HH=0;
+HT=0;
+TT=0;
+TH=0;
+
+function doubletCombination() {
+	for ((i=1; i<=count; i++))
+	do
+		flip=$(( RANDOM % 4 ))
+		if [ $flip -eq 0 ]
+		then
+			HH=$(($HH + 1));
+		elif [ $flip -eq 1 ]
+		then 
+			HT=$(($HT + 1));
+		elif [ $flip -eq 2 ]
+		then
+			TH=$(($TH + 1));
+		else
+			TT=$(($TT + 1));
+		fi
+	done
+
+	HH_percentage=$(( $HH * 100 / $count ))
+	HT_percentage=$(( $HT * 100 / $count ))
+	TH_percentage=$(( $TH * 100 / $count ))
+	TT_percentage=$(( $TT * 100 / $count ))
+}
+
+doubletCombination $count
