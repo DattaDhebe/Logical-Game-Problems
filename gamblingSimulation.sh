@@ -1,18 +1,21 @@
 #!/bin/bash -x
 
-read -p "Enter number of Day to Play :" count
-
 stake=100;
 
-for ((i=1; i<=count; i++))
+while [ true ]
 do
 	gamble=$(( RANDOM % 2 ))
-	if [ $gamble = 1 ]
-	then
-		echo win
-		stake=$(($stake + 1))
+	if [[ $stake > 50 || $stake < 150 ]]
+	then	
+		if [ $gamble = 1 ]
+		then
+			stake=$(($stake + 1));
+		else
+			stake=$(($stake - 1));
+		fi
 	else
-		echo loss
-		stake=$(($stake - 1))
+		break;
 	fi
 done
+
+echo $stake
