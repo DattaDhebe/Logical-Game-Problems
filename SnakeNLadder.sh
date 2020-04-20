@@ -5,64 +5,26 @@ readRules=2;
 exitGame=3;
 
 function newPosition() {
-new_postion=0;
-	case $position in
-		#for Ladder
-		4)
-			new_position=14;
+	position=0;
+	noPlay=0;
+	ladder=1;
+	snake=2;
+
+	choice=$(( RANDOM % 3 ))
+	case $choice in
+		$noPlay)
+			position=$position
 			;;
-		9)
-			new_position=31;
+		$ladder)
+			position=$(($position + $dice))
 			;;
-		20)
-			new_position=38;
-			;;
-		28)
-			new_position=84;
-			;;
-		40)
-         new_position=59;
-         ;;
-      51)
-         new_position=67;
-         ;;
-      63)
-			new_position=81;
-			;;
-		71)
-         new_position=91;
-         ;;
-		#for Snake
-      17)
-         new_position=7;
-         ;;
-      62)
-			new_position=19;
-			;;
-		54)
-         new_position=34;
-         ;;
-      64)
-         new_position=60;
-			;;
-		87)
-         new_position=24;
-         ;;
-      93)
-         new_position=73;
-			;;
-		96)
-         new_position=75;
-         ;;
-      99)
-         new_position=78;
+		$snake)
+			position=$(($position - $dice))
 			;;
 		*)
-			new_position=0
+			position=0
 	esac
-
-	echo $new_position
-
+	echo $position
 }
 
 function gamePlaying() {
@@ -90,19 +52,20 @@ function gamePlaying() {
 		$rollDice)
 			Dice=$(( 1 + RANDOM % 6 ))
 			echo -e "\nDice Number is : $Dice.\n"
-			position=$(($Dice + newPosition))
+			position=$(("checkPosition $Dice"))
 			if (($positon -gt 100))
 			then
-				up=$((position-100))
-				position=$((100-up))
+				above=$((position-100))
+				position=$((100-$above))
 			fi
 			
 			echo -e "Your new Postion is $position.\n"
-			if ((newPosition -lt $position))
+			
+			if (($position -eq 100))
 			then
-				echo -e "Congratualation, you are on Ladder.\n"
+				echo -e "Congratualation, you have won.\n"
 			else
-				echo -e "Sorry, Snake Eat you. you are Down.\n"
+				echo -e "Keep Playing...\n"
 			fi			
 			;;
 		$exitGame)
