@@ -52,7 +52,7 @@ function gamePlaying() {
 		$rollDice)
 			Dice=$(( 1 + RANDOM % 6 ))
 			echo -e "\nDice Number is : $Dice.\n"
-			position=$(("checkPosition $Dice"))
+			newPosition $Dice
 			if (($positon -gt 100))
 			then
 				above=$((position-100))
