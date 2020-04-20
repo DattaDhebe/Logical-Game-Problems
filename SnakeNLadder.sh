@@ -1,4 +1,4 @@
-#/bin/bash -x
+#!/bin/bash -x
 
 playGame=1;
 readRules=2;
@@ -36,17 +36,19 @@ function gamePlaying() {
 				noPlay=0;
    			ladder=1;
    			snake=2;
-   			position=$Dice;
-  				choice=$(( RANDOM % 3 ))
- 				case $choice in
+   			position=0;
+  				
+				choice=$(( RANDOM % 3 ))
+ 				
+				case $choice in
       			$noPlay)
          			position=$position;
          			;;
       			$ladder)
-         			position=$(($position + $dice));
+         			position=$(($position + $Dice));
          			;;
       			$snake)
-         			position=$(($position - $dice));
+         			position=$(($position - $Dice));
          			;;
       			*)
 						position=0;
@@ -78,6 +80,7 @@ function gamePlaying() {
 	done
 	
 }
+
 function rules() {
    printf "1. Press 1 to Role Dice.\n"
 	printf "2. Your are Told Where you are.\n"
