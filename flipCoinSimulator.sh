@@ -8,6 +8,7 @@ declare -A dictionary
 head=0;
 tail=0;
 
+declare -A winingCombination
 declare -A singlet
 
 function singletCombination() {
@@ -25,10 +26,13 @@ function singletCombination() {
 
 	done
 
-	head_percentage=$(( $head * 100 / $count ))
-	tail_percentage=$(( $tail * 100 / $count ))
+	head_percentage=$(( $head * 100 / $count ));
+	tail_percentage=$(( $tail * 100 / $count ));
 	
-	echo ${dictionary[@]}
+	#store percentage in dictionary
+	winingCombination[H]=$head_percentage;
+	winingCombination[T]=$tail_percentage;
+	
 }
 
 singletCombination $count
@@ -64,7 +68,12 @@ function doubletCombination() {
 	TH_percentage=$(( $TH * 100 / $count ))
 	TT_percentage=$(( $TT * 100 / $count ))
 
-	sort -n HH_
+	#store percentage result in dictionary
+   winingCombination[HH]=$HH_percentage;
+   winingCombination[HT]=$HT_percentage;
+	winingCombination[TH]=$TH_percentage;
+   winingCombination[TT]=$TT_percentage;
+
 }
 
 doubletCombination $count
@@ -119,8 +128,20 @@ function tripleCombination() {
 	THH_percentage=$(($THH * 100 / $count))
 	HTH_percentage=$(($HTH * 100 / $count))
 	THT_percentage=$(($THT * 100 / $count))
+
+	#store percentage result in dictionary
+   winingCombination[HHH]=$HHH_percentage;
+   winingCombination[HHT]=$HHT_percentage;
+   winingCombination[HTT]=$HTT_percentage;
+   winingCombination[TTT]=$TTT_percentage;
+	winingCombination[TTH]=$TTH_percentage;
+	winingCombination[THH]=$THH_percentage;
+   winingCombination[HTH]=$HTH_percentage;
+   winingCombination[THT]=$THT_percentage;
+   
 }
 
 tripleCombination $count
 
+echo ${winingCombination[@]}
 
