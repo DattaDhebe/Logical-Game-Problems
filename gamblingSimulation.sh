@@ -27,6 +27,7 @@ numberOfMonth=12;
 
 function checkForDays() {
 	for ((month=1; month<=$numberOfMonth; month++))
+	do
 		for ((days=1; days<=$numbeOfDays; days++))
 		do
 			gamblingSimulation $stake
