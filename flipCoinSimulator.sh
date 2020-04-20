@@ -8,6 +8,8 @@ declare -A dictionary
 head=0;
 tail=0;
 
+declare -A singlet
+
 function singletCombination() {
 	for ((i=1; i<=count; i++))
 	do
@@ -36,6 +38,8 @@ HH=0;
 HT=0;
 TT=0;
 TH=0;
+
+declare -A doublet
 
 function doubletCombination() {
 	for ((i=1; i<=count; i++))
@@ -74,6 +78,8 @@ TTH=0;
 THH=0;
 HTH=0;
 THT=0;
+
+declare -A triplet
 
 function tripleCombination() {
 	for ((i=1; i<=count; i++))
