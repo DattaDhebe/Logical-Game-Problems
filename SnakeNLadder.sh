@@ -3,8 +3,10 @@
 playGame=1;
 readRules=2;
 exitGame=3;
-position=0;
+position1=0;
+position2=0;
 countDiceRole=0;
+
 function gamePlaying() {
 	printf "~ Your Snake and Ladder Game Board ~\n"
    printf " (Home-100) 99 98 97 96 95 94 93 92 91\n"
@@ -22,6 +24,7 @@ function gamePlaying() {
 	rollDice=1;
 	exitGame=2;
 	
+	echo "for Player 1..."
 	while [ true ]
 	do
 		printf "\n1. Press 1 to Role Dice.\n"
@@ -30,7 +33,7 @@ function gamePlaying() {
 		
 		case $n in
 			$rollDice)
-				Dice=$(( 1 + RANDOM % 6 ))
+				Dice1=$(( 1 + RANDOM % 6 ))
 				echo -e "\nDice Number is : $Dice.\n"
 				countDiceRole=$(($countDiceRole + 1))
 				noPlay=0;
