@@ -2,14 +2,16 @@
 
 stake=100;
 count=1;
-function gamblingSimulation() {
+
+for ((days=1; days<=20; days++))
+do
    lowestLost=50;
 	highestWin=150;
-	
+	winDay=0;
+	lossDay=0;
 	while [[ $stake -gt $lowestLost && $stake -lt $highestWin ]]
    do
-		((count++))
-      gamble=$(( RANDOM % 2 ))
+		gamble=$(( RANDOM % 2 ))
       if [ $gamble = 1 ]
       then
        	stake=$(($stake + 1));
@@ -20,34 +22,12 @@ function gamblingSimulation() {
       fi 
 		
 	done
-	winDayResult[$count]=$winDay;
-	lossDayResult[$count]=$lossDay;
-}
+	
+	winDayResult[$days]=$winDay;
+	lossDayResult[$days]=$lossDay;
+	totalAmount=$(($totalAmount + $stake))
+done
 
-#use case for for 20 days
 
-numberOfDays=30;
-numberOfMonth=12;
 
-function checkForDays() {
-	for ((month=1; month<=$numberOfMonth; month++))
-	do
-		for ((days=1; days<=$numberOfDays; days++))
-		do
-			amountPerDay=$(("gamblingSimulation $stake"))
-			echo ${winResult[$days]}
-			echo ${lossResult[$days]}
-		#	if [ $totalWinNLossPerDay -gt 100 ]
-		#	then
-		#		winDay=$(($totalWinNlossDay - 100))
-		#		echo $WinDay
-		#	else
-		#		lossDay=$((100 - $totalWinNlossDay ))
-		#		echo $lossDay
-		#	fi
-		done
-	done
-}
-
-checkForDays $numberOfDays
 
