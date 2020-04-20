@@ -1,41 +1,37 @@
 #!/bin/bash -x
 
 stake=100;
-days=0;
 
 function gamblingSimulation() {
-   while [ true ]
+   lowestLost=50;
+	highestWin=150;
+	while [[ $stake -gt $lowestLost && $stake -lt $highestWin ]]
    do
       gamble=$(( RANDOM % 2 ))
-      if [[ $stake > 50 || $stake < 150 ]]
-      then  
-        	if [ $gamble = 1 ]
-        	then
-           	stake=$(($stake + 1));
-        	else
-           	stake=$(($stake - 1));
-        	fi 
-		else
-			break;
-		fi
+      if [ $gamble = 1 ]
+      then
+       	stake=$(($stake + 1));
+      else
+        	stake=$(($stake - 1));
+      fi 
+		
 	done
-	echo "$stake"
+
+	echo $stake
 }
 
-function useCase4() {
-	while [ true ]
+#use case for for 20 days
+days=0;
+numberOfDays=20;
+
+function checkForDays() {
+	while [ $days -lt $numberOfDays ]
 	do
 		((days++))
-		if [ $days -lt 20 ]
-		then	
-			perDayStake="$( gamblingSimulation $stake )"
-			total_amount=$(($total_amount + $perDayStake))
-		else
-			break;
-		fi
+		perDayStake="$( gamblingSimulation $stake )"
+		total_amount=$(($total_amount + $perDayStake))
 	done
 }
 
-useCase4
-echo $total_amount
+checkForDays $numberOfDays
 
