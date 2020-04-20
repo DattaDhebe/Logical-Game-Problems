@@ -17,9 +17,28 @@ function gamePlaying() {
 	printf "        20 19 18 17 16 15 14 13 12 11\n"
 	printf "start-->01 02 03 04 05 06 07 08 09 10\n\n"
 
+	#declare varible for choice
+	rollDice=1;
+	exitGame=2;
+	
+	printf "\n1. Press 1 to Role Dice.\n"
+	printf "2. Exit Game.\n"
+	read -p "Enter Choice :" n
+	
+	case $n in
+		$rollDice)
+			Dice=$(( 1 + RANDOM % 6 ))
+			echo -e "\nDice Number is : $Dice.\n"
+			break;
+			;;
+		$exitGame)
+			break;
+			;;
+	esac
+	
 }
 function rules() {
-   printf "1. Press Enter to Role Dice.\n"
+   printf "1. Press 1 to Role Dice.\n"
 	printf "2. Your are Told Where you are.\n"
 	printf "3. if you step On Snake you will be pull Down.\n"
 	printf "4. if step on Ladder you will be pull Up.\n"
