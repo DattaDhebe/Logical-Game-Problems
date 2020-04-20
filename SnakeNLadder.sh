@@ -1,10 +1,10 @@
-#!/bin/bash -x
+#/bin/bash -x
 
 playGame=1;
 readRules=2;
 exitGame=3;
 position=0;
-
+countDiceRole=0;
 function gamePlaying() {
 	printf "~ Your Snake and Ladder Game Board ~\n"
    printf " (Home-100) 99 98 97 96 95 94 93 92 91\n"
@@ -22,24 +22,23 @@ function gamePlaying() {
 	rollDice=1;
 	exitGame=2;
 	
-	while [ $position -eq 100 ]
+	while [ true ]
 	do
 		printf "\n1. Press 1 to Role Dice.\n"
 		printf "2. Exit Game.\n"
 		read -p "Enter Choice :" n
-	
+		
 		case $n in
 			$rollDice)
 				Dice=$(( 1 + RANDOM % 6 ))
 				echo -e "\nDice Number is : $Dice.\n"
-				
+				countDiceRole=$(($countDiceRole + 1))
 				noPlay=0;
    			ladder=1;
    			snake=2;
    			position=$Dice;
-
-   			choice=$(( RANDOM % 3 ))
-   			case $choice in
+  				choice=$(( RANDOM % 3 ))
+ 				case $choice in
       			$noPlay)
          			position=$position;
          			;;
@@ -59,21 +58,22 @@ function gamePlaying() {
 					above=$((position-100))
 					position=$((100-$above))
 				fi
-			
 				echo -e "Your new Postion is $position.\n"
-			
 				if (($position = 100))
 				then
-					echo -e "Congratualation, you have won.\n"
+					echo "Congratualation, you have won.\n"
+					echo "Number of Time Dice Role is : $countDiceRole\n"
+					break;
 				else
 					echo -e "Keep Playing...\n"
-				fi			
+				fi
 				;;
 			$exitGame)
 				break;
 				;;
 			*)
-			roleDice=0;
+				roleDice=0;
+				;;
 		esac
 	done
 	
