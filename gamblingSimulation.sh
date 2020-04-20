@@ -1,8 +1,7 @@
 #!/bin/bash -x
 
 stake=100;
-count=1;
-
+declare -A perDayStakeAmount
 for ((days=1; days<=20; days++))
 do
    lowestLost=50;
@@ -26,6 +25,7 @@ do
 	winDayResult[$days]=$winDay;
 	lossDayResult[$days]=$lossDay;
 	totalAmount=$(($totalAmount + $stake))
+	perDayStakeAmount["stake"]=$totalAmount
 done
 
 
