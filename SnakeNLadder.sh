@@ -1,31 +1,9 @@
-#/bin/bash -x
+#!/bin/bash -x
 
 playGame=1;
 readRules=2;
 exitGame=3;
-
-function newPosition() {
-	position=0;
-	noPlay=0;
-	ladder=1;
-	snake=2;
-
-	choice=$(( RANDOM % 3 ))
-	case $choice in
-		$noPlay)
-			position=$position
-			;;
-		$ladder)
-			position=$(($position + $dice))
-			;;
-		$snake)
-			position=$(($position - $dice))
-			;;
-		*)
-			position=0
-	esac
-	echo $position
-}
+position=0;
 
 function gamePlaying() {
 	printf "~ Your Snake and Ladder Game Board ~\n"
@@ -44,34 +22,60 @@ function gamePlaying() {
 	rollDice=1;
 	exitGame=2;
 	
-	printf "\n1. Press 1 to Role Dice.\n"
-	printf "2. Exit Game.\n"
-	read -p "Enter Choice :" n
+	while [ $position -eq 100 ]
+	do
+		printf "\n1. Press 1 to Role Dice.\n"
+		printf "2. Exit Game.\n"
+		read -p "Enter Choice :" n
 	
-	case $n in
-		$rollDice)
-			Dice=$(( 1 + RANDOM % 6 ))
-			echo -e "\nDice Number is : $Dice.\n"
-			newPosition $Dice
-			if (($positon -gt 100))
-			then
-				above=$((position-100))
-				position=$((100-$above))
-			fi
+		case $n in
+			$rollDice)
+				Dice=$(( 1 + RANDOM % 6 ))
+				echo -e "\nDice Number is : $Dice.\n"
+				
+				noPlay=0;
+   			ladder=1;
+   			snake=2;
+   			position=$Dice;
+
+   			choice=$(( RANDOM % 3 ))
+   			case $choice in
+      			$noPlay)
+         			position=$position;
+         			;;
+      			$ladder)
+         			position=$(($position + $dice));
+         			;;
+      			$snake)
+         			position=$(($position - $dice));
+         			;;
+      			*)
+						position=0;
+						;;
+				esac
+
+				if (($positon > 100))
+				then
+					above=$((position-100))
+					position=$((100-$above))
+				fi
 			
-			echo -e "Your new Postion is $position.\n"
+				echo -e "Your new Postion is $position.\n"
 			
-			if (($position -eq 100))
-			then
-				echo -e "Congratualation, you have won.\n"
-			else
-				echo -e "Keep Playing...\n"
-			fi			
-			;;
-		$exitGame)
-			break;
-			;;
-	esac
+				if (($position = 100))
+				then
+					echo -e "Congratualation, you have won.\n"
+				else
+					echo -e "Keep Playing...\n"
+				fi			
+				;;
+			$exitGame)
+				break;
+				;;
+			*)
+			roleDice=0;
+		esac
+	done
 	
 }
 function rules() {
