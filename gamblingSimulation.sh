@@ -21,15 +21,25 @@ function gamblingSimulation() {
 }
 
 #use case for for 20 days
-days=0;
-numberOfDays=20;
+
+numberOfDays=30;
+numberOfMonth=12;
 
 function checkForDays() {
-	while [ $days -lt $numberOfDays ]
-	do
-		((days++))
-		perDayStake="$( gamblingSimulation $stake )"
-		total_amount=$(($total_amount + $perDayStake))
+	for ((month=1; month<=$numberOfMonth; month++))
+		for ((days=1; days<=$numbeOfDays; days++))
+		do
+			gamblingSimulation $stake
+			totalWinNLossPerDay=$(($winResult[$days] + $lossResult[$days]))
+			if [ $totalWinNLossPerDay -gt 100 ]
+			then
+				winDay=$(($totalWinNlossDay - 100))
+				echo $WinDay
+			else
+				lossDay=$((100 - $totalWinNlossDay ))
+				echo $lossDay
+			fi
+		done
 	done
 }
 
