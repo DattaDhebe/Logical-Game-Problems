@@ -36,7 +36,7 @@ function gamePlaying() {
 				noPlay=0;
    			ladder=1;
    			snake=2;
-   			position=0;
+   		
   				
 				choice=$(( RANDOM % 3 ))
  				
@@ -48,20 +48,25 @@ function gamePlaying() {
          			position=$(($position + $Dice));
          			;;
       			$snake)
-         			position=$(($position - $Dice));
-         			;;
+						if [ $position < 6 ]
+						then
+							position=$position;
+						else	
+         				position=$(($position - $Dice));
+         			fi
+						;;
       			*)
 						position=0;
 						;;
 				esac
 
-				if (($positon > 100))
+				if [ $positon -gt 100 ]
 				then
-					above=$((position-100))
+					above=$(($position-100))
 					position=$((100-$above))
 				fi
 				echo -e "Your new Postion is $position.\n"
-				if (($position = 100))
+				if [ $position -eq 100 ]
 				then
 					echo "Congratualation, you have won.\n"
 					echo "Number of Time Dice Role is : $countDiceRole\n"
