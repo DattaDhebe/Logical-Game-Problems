@@ -4,6 +4,67 @@ playGame=1;
 readRules=2;
 exitGame=3;
 
+function newPosition() {
+new_postion=0;
+	case $position in
+		#for Ladder
+		4)
+			new_position=14;
+			;;
+		9)
+			new_position=31;
+			;;
+		20)
+			new_position=38;
+			;;
+		28)
+			new_position=84;
+			;;
+		40)
+         new_position=59;
+         ;;
+      51)
+         new_position=67;
+         ;;
+      63)
+			new_position=81;
+			;;
+		71)
+         new_position=91;
+         ;;
+		#for Snake
+      17)
+         new_position=7;
+         ;;
+      62)
+			new_position=19;
+			;;
+		54)
+         new_position=34;
+         ;;
+      64)
+         new_position=60;
+			;;
+		87)
+         new_position=24;
+         ;;
+      93)
+         new_position=73;
+			;;
+		96)
+         new_position=75;
+         ;;
+      99)
+         new_position=78;
+			;;
+		*)
+			new_position=0
+	esac
+
+	echo $new_position
+
+}
+
 function gamePlaying() {
 	printf "~ Your Snake and Ladder Game Board ~\n"
    printf " (Home-100) 99 98 97 96 95 94 93 92 91\n"
@@ -29,7 +90,20 @@ function gamePlaying() {
 		$rollDice)
 			Dice=$(( 1 + RANDOM % 6 ))
 			echo -e "\nDice Number is : $Dice.\n"
-			break;
+			position=$(($Dice + newPosition))
+			if (($positon -gt 100))
+			then
+				up=$((position-100))
+				position=$((100-up))
+			fi
+			
+			echo -e "Your new Postion is $position.\n"
+			if ((newPosition -lt $position))
+			then
+				echo -e "Congratualation, you are on Ladder.\n"
+			else
+				echo -e "Sorry, Snake Eat you. you are Down.\n"
+			fi			
 			;;
 		$exitGame)
 			break;

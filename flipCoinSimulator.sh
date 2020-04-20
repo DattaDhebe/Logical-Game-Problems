@@ -59,6 +59,8 @@ function doubletCombination() {
 	HT_percentage=$(( $HT * 100 / $count ))
 	TH_percentage=$(( $TH * 100 / $count ))
 	TT_percentage=$(( $TT * 100 / $count ))
+
+	sort -n HH_
 }
 
 doubletCombination $count
@@ -114,4 +116,5 @@ function tripleCombination() {
 }
 
 tripleCombination $count
+
 
