@@ -142,40 +142,12 @@ function tripleCombination() {
 }
 
 tripleCombination $count
-count=0;
-for values in "${winingCombination[@]}"
-do
-	((count++))
-	echo $values
-	result[$count]=$values	 
-done 
 
 #to sort result so that we can get wining Combination
-
-for ((loop=1; loop<=$count; loop++))
-do
-	for ((inner_loop=$loop; inner_loop<=$count; inner_loop++))
-	do
-		if [ ${result[loop]} -gt ${result[inner_loop]} ]
-		then
-			temp=${result[loop]};
-			result[$loop]=${result[$inner_loop]};
-			result[$inner_loop]=$temp
-		fi
-	done
-done
-
-echo "result in Ascending order : "
-for ((loop=1; loop<=$count; loop++))
-do
-	echo ${result[$loop]}
-done
-
-winner=${result[$count]}
-
 #diplaying wining combination
-${!winingCombination[@]}
-${winingCombination[@]}
 
-${!winingCombination["$winner"]}
-
+echo ${winingCombination[@]}
+for k in "${!winingCombination[@]}"
+do
+    echo $k ' - ' ${winingCombination["$k"]}
+done | sort -rn -k3
