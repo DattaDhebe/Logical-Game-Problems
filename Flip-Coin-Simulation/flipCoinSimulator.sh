@@ -146,8 +146,11 @@ tripleCombination $count
 #to sort result so that we can get wining Combination
 #diplaying wining combination
 
-echo ${winingCombination[@]}
-for k in "${!winingCombination[@]}"
-do
-    echo $k ' - ' ${winingCombination["$k"]}
-done | sort -rn -k3
+function displayResult() {
+	echo ${winingCombination[@]}
+	for item in "${!winingCombination[@]}"
+	do
+   	 echo $item ' - ' ${winingCombination["$item"]}
+	done | sort -rn -k3
+}
+displayResult
