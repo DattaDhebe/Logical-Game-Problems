@@ -8,6 +8,8 @@ lossDay=0;
 declare -A perDayStakeAmount
 
 function gamblingSimulation() {
+	
+	
 
 	for ((days=1; days<=20; days++))
 	do
@@ -50,4 +52,32 @@ function gamblingSimulation() {
 	fi
 }
 
+#use case 6 luckey
+maxWin=0;
+maxLoss=0
+
+function luckeyAndUnluckey() {
+
+	for ((day=1;day<=20;day++))
+	do
+		if [ $winDayResult[$day] -gt $luckeyDay ]
+		then
+			maxWin=$winDayResult[$day];
+		elif [ $maxWin -eq $winDayResult[$day] ]
+   	then
+      	echo "Luckey Day : $day";
+   	fi
+   
+   	if [ $lossDayResult[$day] -gt $unLuckeyDay ]
+		then
+			maxLoss=$lossDayResult[$day];
+		elif [ $maxLoss -eq $lossDayResult[$day] ]
+   	then
+      	echo "UnLuckey Day : $day";
+		fi
+	done
+	
+}
+
 gamblingSimulation
+luckeyAndUnluckey
