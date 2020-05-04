@@ -26,16 +26,12 @@ function singletCombination() {
 
 	done
 
-	head_percentage=$(( $head * 100 / $count ));
-	tail_percentage=$(( $tail * 100 / $count ));
 	
 	#store percentage in dictionary
 	winingCombination[H]=$head_percentage;
 	winingCombination[T]=$tail_percentage;
 	
 }
-
-singletCombination $count
 
 #varibale declaration for doublet
 HH=0;
@@ -63,10 +59,6 @@ function doubletCombination() {
 		fi
 	done
 
-	HH_percentage=$(( $HH * 100 / $count ))
-	HT_percentage=$(( $HT * 100 / $count ))
-	TH_percentage=$(( $TH * 100 / $count ))
-	TT_percentage=$(( $TT * 100 / $count ))
 
 	#store percentage result in dictionary
    winingCombination[HH]=$HH_percentage;
@@ -76,7 +68,6 @@ function doubletCombination() {
 
 }
 
-doubletCombination $count
 
 #declare varible for triplet combination
 HHH=0;
@@ -120,15 +111,7 @@ function tripleCombination() {
 		fi
 	done
 	
-	HHH_percentage=$(($HHH * 100 / $count))
-	HHT_percentage=$(($HHT * 100 / $count))
-	HTT_percentage=$(($HTT * 100 / $count))
-	TTT_percentage=$(($TTT * 100 / $count))
-	TTH_percentage=$(($TTH * 100 / $count))
-	THH_percentage=$(($THH * 100 / $count))
-	HTH_percentage=$(($HTH * 100 / $count))
-	THT_percentage=$(($THT * 100 / $count))
-
+	
 	#store percentage result in dictionary
    winingCombination[HHH]=$HHH_percentage;
    winingCombination[HHT]=$HHT_percentage;
@@ -141,16 +124,24 @@ function tripleCombination() {
    
 }
 
-tripleCombination $count
+
 
 #to sort result so that we can get wining Combination
 #diplaying wining combination
 
 function displayResult() {
+
 	echo ${winingCombination[@]}
 	for item in "${!winingCombination[@]}"
 	do
    	 echo $item ' - ' ${winingCombination["$item"]}
 	done | sort -rn -k3
 }
-displayResult
+
+
+function flipCoinSimulation() {
+	singletCombination $count
+	doubletCombination $count
+	tripleCombination $count
+	displayResult
+}
