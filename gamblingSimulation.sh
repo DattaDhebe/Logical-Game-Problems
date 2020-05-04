@@ -7,8 +7,7 @@ lowestLost=50;
 highestWin=150;
 
 declare -A perDayStakeAmount
-declare -A noOfWins
-declare -A noOfLoss
+
 
 for ((days=1; days<=20; days++))
 do
@@ -18,11 +17,11 @@ do
 		gamble=$(( RANDOM % 2 ))
       if [ $gamble = 1 ]
       then
-       	noOfWins[$days]=$((${noOfWins[$days]}+1));
+       	
        	stake=$(($stake + 1));
 			winDay=$(($winDay + 1));
       else
-      	noOfLoss[$days]=$((${noOfLoss[$days]}+1));
+      	
         	stake=$(($stake - 1));
 			lossDay=$(($lossDay + 1))
       fi 
@@ -42,7 +41,7 @@ done
 echo "\nNumber of Days won : $winDay"
 echo "\nNumber of Days lost: $lossDay"
 
-if [ $ -gt $lossDayResult ] 
+if [ $winDayResult -gt $lossDayResult ] 
 then
 	echo "you can play next month\n"
 else
